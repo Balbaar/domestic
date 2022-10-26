@@ -8,10 +8,19 @@ import numpy as np
 
 pt.tesseract_cmd = "C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-#Math Problem To Solve
-math_region = (1070,777,1165,805)
-white_from_box = (1263,483,1270,490)
 
+#Info
+math_region = (522,422,602,452)
+white_from_box = (668,212,675,220)
+
+ans_input = (666,486)
+enter_button = (666,537)
+sign_button =(1270,550)
+
+work1 = (776,329)
+work2 = (714,678)
+
+#Math Problem To Solve
 def reload_page():
     pyautogui.keyDown("ctrl")
     pyautogui.press("r")
@@ -50,24 +59,25 @@ def process_and_sign():
     print(ans)
 
     #Type answer into input box
-    pyautogui.leftClick(1250,850)
+    pyautogui.leftClick(ans_input)
     for x in str(ans):
         time.sleep(0.3)
         pyautogui.press(f"{x}")
     time.sleep(0.5)
 
     #Sign in using wallet
-    pyautogui.leftClick(1250,940)
+    pyautogui.leftClick(enter_button)
     time.sleep(6)
-    pyautogui.leftClick(2450,550)
+    pyautogui.leftClick(sign_button)
 
 process_and_sign()
 
 def start_work():
-    pyautogui.leftClick(1750,426)
-    time.sleep(0.5)
-    pyautogui.leftClick(1335,921)
+    pyautogui.leftClick(work1)
+    time.sleep(1.5)
+    pyautogui.leftClick(work2)
 
+time.sleep(5)
 
 while True:
     reload_page()
@@ -87,5 +97,6 @@ while True:
     if avg_color[0] == 255:
         process_and_sign()
     
-    time.sleep(610)
+    time.sleep(10)
     start_work()
+    time.sleep(610)

@@ -17,8 +17,8 @@ ans_input = (666,486)
 enter_button = (666,537)
 sign_button =(1270,550)
 
-work1 = (776,329)
-work2 = (714,678)
+work1 = (725,715)
+work2 = (765,350)
 
 #Math Problem To Solve
 def reload_page():
@@ -51,7 +51,13 @@ def grab_and_solve():
 def process_and_sign():
     #Process string
     ms_numbers = (grab_and_solve().split("+"))
+
+    #Calulate answer and if string contains something weird redo previus steps
+    #try:
     ans = int(ms_numbers[0]) + int(ms_numbers[1])
+
+    #except:
+    grab_and_solve()
 
     #Answer is more than lileky wrong in this case
     if ans > 40:

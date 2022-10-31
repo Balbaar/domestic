@@ -5,6 +5,7 @@ import keyboard
 import time
 import cv2
 import numpy as np
+import regex
 
 pt.tesseract_cmd = "C:\Program Files\Tesseract-OCR\tesseract.exe"
 
@@ -38,8 +39,8 @@ def grab_and_solve():
 
     ms = math_to_string()
 
-    while "+" not in str(ms):
-        print("Unable to read")
+    while "+" not in str(ms) or regex.search("[a-zA-Z]", ms):
+        print("Unable to read or string contained alphabet")
         reload_page()
         time.sleep(1)
 

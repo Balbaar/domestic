@@ -1,3 +1,4 @@
+from distutils import msvccompiler
 import pytesseract as pt
 from PIL import ImageGrab
 import pyautogui
@@ -11,15 +12,15 @@ pt.tesseract_cmd = "C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 
 #Info
-math_region = (522,422,602,452)
-white_from_box = (668,212,675,220)
+math_region = (528,412,584,435)
+white_from_box = (625,572,653,587)
 
-ans_input = (666,486)
-enter_button = (666,537)
-sign_button =(1270,550)
+ans_input = (663,467)
+enter_button = (669,535)
+sign_button =(1264,557)
 
-work1 = (725,715)
-work2 = (765,350)
+work1 = (789,252) #Domestor
+work2 = (157,719) #Workers
 
 #Math Problem To Solve
 def reload_page():
@@ -38,6 +39,7 @@ def grab_and_solve():
         return math_string
 
     ms = math_to_string()
+    print(ms)
 
     while "+" not in str(ms) or regex.search("[a-zA-Z]", ms):
         print("Unable to read or string contained alphabet")
@@ -74,14 +76,14 @@ def process_and_sign():
 
     #Sign in using wallet
     pyautogui.leftClick(enter_button)
-    time.sleep(6)
+    time.sleep(8)
     pyautogui.leftClick(sign_button)
 
 process_and_sign()
 
 def start_work():
     pyautogui.leftClick(work1)
-    time.sleep(1.5)
+    time.sleep(5)
     pyautogui.leftClick(work2)
 
 time.sleep(5)

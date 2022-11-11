@@ -108,7 +108,6 @@ def start_bot():
     #Check for color white
     temp = np.average(cap_check, axis=0)
     avg_color = np.average(temp, axis=0)
-    print(avg_color)
 
     if avg_color[0] > 200:
         process_and_sign()

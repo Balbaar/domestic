@@ -31,10 +31,15 @@ with open("config.json", "r") as f:
     config_file = json.loads(f.read())
 
 def start():
+    start_bot_thread = threading.Thread(target=start_bot)
+    start_bot_thread.start()
     while True:
+        print("Started Bot")
         start_bot()
-        time.sleep(610)
+        print("Bot Finished")
+        time.sleep(60)
         if stop_thread == True:
+            print("Stopped Bot")
             break
     start_bot_thread.join()
 
@@ -101,8 +106,8 @@ while True:
 
     if event == "Start":
         stop_thread = False
-        start_bot_thread = threading.Thread(target=start_bot)
-        start_bot_thread.start()
+        start()
+        
     
     if event == "Stop":
         stop_thread = True

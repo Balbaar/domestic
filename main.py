@@ -61,13 +61,13 @@ def process_and_sign():
     time.sleep(6)
     pyautogui.leftClick(2450,550)
 
-process_and_sign()
 
 def start_work():
     pyautogui.leftClick(1750,426)
     time.sleep(0.5)
     pyautogui.leftClick(1335,921)
 
+time.sleep(20)
 
 while True:
     reload_page()

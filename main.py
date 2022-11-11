@@ -7,20 +7,27 @@ import time
 import cv2
 import numpy as np
 import regex
+import json
 
 pt.tesseract_cmd = "C:\Program Files\Tesseract-OCR\tesseract.exe"
 
+#JSON file
+with open("config.json", "r") as f:
+    cfg = json.loads(f.read())
 
 #Info
-math_region = (528,412,584,435)
-white_from_box = (625,572,653,574)
+math_region = (cfg["math_region"][0],cfg["math_region"][1],cfg["math_region"][2],cfg["math_region"][3])
+white_from_box = (cfg["white_from_box"][0],cfg["white_from_box"][1],cfg["white_from_box"][2],cfg["white_from_box"][3])
 
-ans_input = (663,467)
-enter_button = (669,535)
-sign_button =(1264,557)
+ans_input = (cfg["ans_input"][0],cfg["ans_input"][1])
+enter_button = (cfg["enter_button"][0],cfg["enter_button"][1])
+sign_button =(cfg["sign_button"][0],cfg["sign_button"][1])
 
-work1 = (789,252) #Domestor
-work2 = (157,719) #Workers
+work1 = (cfg["work1"][0],cfg["work1"][1]) #Domestor
+work2 = (cfg["work2"][0],cfg["work2"][1]) #Workers
+
+
+
 
 #Math Problem To Solve
 def reload_page():
@@ -85,9 +92,10 @@ def start_work():
     time.sleep(5)
     pyautogui.leftClick(work2)
 
-time.sleep(5)
 
-while True:
+def start_bot():
+    time.sleep(5)
+
     reload_page()
     time.sleep(2)
     #Check to see if robot check comes up
@@ -107,4 +115,3 @@ while True:
     
     time.sleep(10)
     start_work()
-    time.sleep(610)

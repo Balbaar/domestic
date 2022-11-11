@@ -13,7 +13,7 @@ pt.tesseract_cmd = "C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 #Info
 math_region = (528,412,584,435)
-white_from_box = (625,572,653,587)
+white_from_box = (625,572,653,574)
 
 ans_input = (663,467)
 enter_button = (669,535)

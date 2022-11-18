@@ -31,15 +31,17 @@ with open("config.json", "r") as f:
     config_file = json.loads(f.read())
 
 def start():
+    timer = 0
+    print("Bot Started")
     while True:
         if stop_thread == True:
             print("Stopped Bot")
             break
-        print("Started Bot")
-        start_bot()
-        print("Bot Finished")
-        print("Waiting 10min")
-        time.sleep(610)
+        if timer % 600 == 0:
+            start_bot()
+        time.sleep(1)
+        timer += 1
+        print(threading.active_count())
 
 
 while True:
@@ -103,16 +105,22 @@ while True:
             f.write(new_config_file)
 
     if event == "Start":
-        stop_thread = False
-        start_bot_thread = threading.Thread(target=start)
-        start_bot_thread.start()
-        if stop_thread == True:
-            start_bot_thread.join()
+        if threading.active_count() == 1:
+            stop_thread = False
+            start_bot_thread = threading.Thread(target=start)
+            start_bot_thread.start()
+            if stop_thread == True:
+                start_bot_thread.join()
+        else:
+            print("Bot already running")
 
         
     
     if event == "Stop":
-        stop_thread = True
+        if threading.active_count() == 2:
+            stop_thread = True
+        else:
+            print("There is no bot to stop stupid...")
         
         
 

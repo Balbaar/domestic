@@ -1,4 +1,3 @@
-from distutils import msvccompiler
 import pytesseract as pt
 from PIL import ImageGrab
 import pyautogui
@@ -48,8 +47,8 @@ def grab_and_solve():
     ms = math_to_string()
     print(ms)
 
-    while "+" not in str(ms) or regex.search("[a-zA-Z]", ms):
-        print("Unable to read or string contained alphabet")
+    while regex.search("[a-zA-Z]", ms) or "+" not in str(ms): 
+        print("Unable to read correctly")
         reload_page()
         time.sleep(1)
 
@@ -60,13 +59,10 @@ def grab_and_solve():
 
 def process_and_sign():
     #Process string
-    ms_numbers = (grab_and_solve().split("+"))
-
-    #Calulate answer and if string contains something weird redo previus steps
-    #try:
+    math_pre_split = grab_and_solve()
+    ms_numbers = (math_pre_split.split("+"))
     ans = int(ms_numbers[0]) + int(ms_numbers[1])
 
-    #except:
     grab_and_solve()
 
     #Answer is more than lileky wrong in this case
@@ -95,8 +91,7 @@ def start_work():
 
 def start_bot():
     time.sleep(5)
-
-    reload_page()
+    start_work()
     time.sleep(2)
     #Check to see if robot check comes up
 
@@ -110,7 +105,10 @@ def start_bot():
     avg_color = np.average(temp, axis=0)
 
     if avg_color[0] > 200:
+        print("Started solving math problem")
         process_and_sign()
     
     time.sleep(10)
     start_work()
+
+
